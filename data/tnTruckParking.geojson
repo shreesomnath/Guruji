@@ -1,0 +1,21 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "source": "SYNTHETIC — models the Task 10 truck parking / Hours-of-Service (HOS) problem: commercial lots plus known informal ramp-parking pressure points. Not a real-time feed.",
+    "predictedAvailability": "0.0 (full) to 1.0 (empty) — placeholder for the Phase 2 ML prediction model"
+  },
+  "features": [
+    { "type": "Feature", "properties": { "id": "TN-PK-001", "name": "Pilot Travel Center — Memphis", "type": "commercial", "highway": "I-40/I-240", "capacity": 120, "predictedAvailability": 0.15 }, "geometry": { "type": "Point", "coordinates": [-90.00, 35.14] } },
+    { "type": "Feature", "properties": { "id": "TN-PK-002", "name": "Love's Travel Stop — Jackson", "type": "commercial", "highway": "I-40", "capacity": 100, "predictedAvailability": 0.40 }, "geometry": { "type": "Point", "coordinates": [-88.83, 35.61] } },
+    { "type": "Feature", "properties": { "id": "TN-PK-003", "name": "TA Travel Center — Lebanon (east Nashville)", "type": "commercial", "highway": "I-40", "capacity": 150, "predictedAvailability": 0.10 }, "geometry": { "type": "Point", "coordinates": [-86.29, 36.17] } },
+    { "type": "Feature", "properties": { "id": "TN-PK-004", "name": "Pilot Travel Center — Cookeville", "type": "commercial", "highway": "I-40", "capacity": 80, "predictedAvailability": 0.55 }, "geometry": { "type": "Point", "coordinates": [-85.48, 36.15] } },
+    { "type": "Feature", "properties": { "id": "TN-PK-005", "name": "Flying J — Knoxville", "type": "commercial", "highway": "I-40/I-75", "capacity": 130, "predictedAvailability": 0.20 }, "geometry": { "type": "Point", "coordinates": [-83.98, 35.93] } },
+    { "type": "Feature", "properties": { "id": "TN-PK-006", "name": "Monteagle Mountain ramp overflow", "type": "informal-ramp-pressure", "highway": "I-24", "capacity": 0, "predictedAvailability": 0.05, "note": "No legal capacity — documented illegal ramp/shoulder parking pressure point near the Monteagle grade" }, "geometry": { "type": "Point", "coordinates": [-85.80, 35.26] } },
+    { "type": "Feature", "properties": { "id": "TN-PK-007", "name": "Love's Travel Stop — Chattanooga", "type": "commercial", "highway": "I-24/I-75", "capacity": 90, "predictedAvailability": 0.30 }, "geometry": { "type": "Point", "coordinates": [-85.25, 35.03] } },
+    { "type": "Feature", "properties": { "id": "TN-PK-008", "name": "Murfreesboro Rest Area truck lot", "type": "rest-area", "highway": "I-24", "capacity": 40, "predictedAvailability": 0.50 }, "geometry": { "type": "Point", "coordinates": [-86.35, 35.80] } },
+    { "type": "Feature", "properties": { "id": "TN-PK-009", "name": "Jellico Mountain ramp overflow", "type": "informal-ramp-pressure", "highway": "I-75", "capacity": 0, "predictedAvailability": 0.08, "note": "No legal capacity — documented illegal ramp/shoulder parking pressure point near the Jellico grade, TN/KY line" }, "geometry": { "type": "Point", "coordinates": [-84.13, 36.55] } },
+    { "type": "Feature", "properties": { "id": "TN-PK-010", "name": "TA Travel Center — north Knoxville", "type": "commercial", "highway": "I-75", "capacity": 100, "predictedAvailability": 0.35 }, "geometry": { "type": "Point", "coordinates": [-83.90, 36.10] } },
+    { "type": "Feature", "properties": { "id": "TN-PK-011", "name": "Pilot Travel Center — Clarksville", "type": "commercial", "highway": "I-24", "capacity": 70, "predictedAvailability": 0.60 }, "geometry": { "type": "Point", "coordinates": [-87.30, 36.48] } },
+    { "type": "Feature", "properties": { "id": "TN-PK-012", "name": "Flying J — south Memphis", "type": "commercial", "highway": "I-55", "capacity": 85, "predictedAvailability": 0.25 }, "geometry": { "type": "Point", "coordinates": [-90.05, 35.02] } }
+  ]
+}

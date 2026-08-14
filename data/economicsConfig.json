@@ -1,0 +1,7 @@
+{
+  "dieselPricePerGallon": 3.85,
+  "avgTruckMPG": 6.5,
+  "driverHourlyRate": 28,
+  "maintenanceCostPerMile": 0.17,
+  "notes": "Placeholder assumptions for the Phase 1 prototype. Replace with a live fuel price API and company-specific fleet data in Phase 2."
+}

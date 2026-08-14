@@ -1,0 +1,20 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "source": "SYNTHETIC fallback — used only if the live Overpass/OpenStreetMap query fails (network issue or rate limit). Hand-placed near TN freight corridors."
+  },
+  "features": [
+    { "type": "Feature", "properties": { "id": "TN-GAS-001", "name": "Shell — Memphis I-40/I-240", "brand": "Shell", "source": "fallback" }, "geometry": { "type": "Point", "coordinates": [-89.995, 35.146] } },
+    { "type": "Feature", "properties": { "id": "TN-GAS-002", "name": "Marathon — Jackson I-40", "brand": "Marathon", "source": "fallback" }, "geometry": { "type": "Point", "coordinates": [-88.82, 35.60] } },
+    { "type": "Feature", "properties": { "id": "TN-GAS-003", "name": "Exxon — East Nashville I-40", "brand": "Exxon", "source": "fallback" }, "geometry": { "type": "Point", "coordinates": [-86.72, 36.17] } },
+    { "type": "Feature", "properties": { "id": "TN-GAS-004", "name": "BP — Cookeville I-40", "brand": "BP", "source": "fallback" }, "geometry": { "type": "Point", "coordinates": [-85.49, 36.16] } },
+    { "type": "Feature", "properties": { "id": "TN-GAS-005", "name": "Circle K — Knoxville I-40/I-75", "brand": "Circle K", "source": "fallback" }, "geometry": { "type": "Point", "coordinates": [-83.96, 35.94] } },
+    { "type": "Feature", "properties": { "id": "TN-GAS-006", "name": "Marathon — Clarksville I-24", "brand": "Marathon", "source": "fallback" }, "geometry": { "type": "Point", "coordinates": [-87.33, 36.51] } },
+    { "type": "Feature", "properties": { "id": "TN-GAS-007", "name": "Shell — Murfreesboro I-24", "brand": "Shell", "source": "fallback" }, "geometry": { "type": "Point", "coordinates": [-86.37, 35.83] } },
+    { "type": "Feature", "properties": { "id": "TN-GAS-008", "name": "Exxon — Monteagle I-24", "brand": "Exxon", "source": "fallback" }, "geometry": { "type": "Point", "coordinates": [-85.82, 35.25] } },
+    { "type": "Feature", "properties": { "id": "TN-GAS-009", "name": "BP — Chattanooga I-24/I-75", "brand": "BP", "source": "fallback" }, "geometry": { "type": "Point", "coordinates": [-85.28, 35.03] } },
+    { "type": "Feature", "properties": { "id": "TN-GAS-010", "name": "Circle K — Franklin I-65", "brand": "Circle K", "source": "fallback" }, "geometry": { "type": "Point", "coordinates": [-86.86, 35.91] } },
+    { "type": "Feature", "properties": { "id": "TN-GAS-011", "name": "Marathon — Portland I-65", "brand": "Marathon", "source": "fallback" }, "geometry": { "type": "Point", "coordinates": [-86.51, 36.56] } },
+    { "type": "Feature", "properties": { "id": "TN-GAS-012", "name": "Shell — Jellico I-75", "brand": "Shell", "source": "fallback" }, "geometry": { "type": "Point", "coordinates": [-84.12, 36.56] } }
+  ]
+}
