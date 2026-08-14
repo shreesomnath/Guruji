@@ -17,6 +17,7 @@ import HotspotLayer from "./HotspotLayer.jsx";
 import RestAreaLayer from "./RestAreaLayer.jsx";
 import ParkingLayer from "./ParkingLayer.jsx";
 import GasStationLayer from "./GasStationLayer.jsx";
+import TrafficLayer from "./TrafficLayer.jsx";
 
 const TENNESSEE_CENTER = [35.86, -86.4];
 const ORIGIN_ICON = pinIcon("#22c55e");
@@ -163,7 +164,10 @@ export default function MapView({
         );
       })}
 
-      {routePositions && (
+      {routePositions && layers.traffic && (
+        <TrafficLayer routePositions={routePositions} />
+      )}
+      {routePositions && !layers.traffic && (
         <Polyline positions={routePositions} pathOptions={{ color: "#1d4ed8", weight: 6, opacity: 0.9 }}>
           <Popup>
             <b>Selected Route</b>

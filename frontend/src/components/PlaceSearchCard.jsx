@@ -45,6 +45,11 @@ export default function PlaceSearchCard({
 
       {place && (
         <div className="place-card">
+          {userProfile?.truckHeight > 13 && (
+            <div style={{ padding: "8px", background: "#fef2f2", color: "#991b1b", fontSize: "0.8rem", borderRadius: "6px", marginBottom: "12px", border: "1px solid #fca5a5" }}>
+              <b>Truck Profile Active:</b> Routing will avoid low bridges under {userProfile.truckHeight}ft.
+            </div>
+          )}
           <strong>📍 {place.label}</strong>
           <div className="button-row">
             <button className="primary" onClick={onGetDirections}>

@@ -18,6 +18,15 @@ export default function TripSummary({ result, hosHours, setHosHours }) {
         <li>Estimated fuel cost: ${economics.fuelCost}</li>
       </ul>
 
+      {selected.warnings && selected.warnings.length > 0 && (
+        <div style={{ marginTop: "12px", padding: "10px", background: "#fef2f2", borderRadius: "8px", border: "1px solid #fca5a5" }}>
+          <b style={{ color: "#b91c1c", fontSize: "0.85rem", display: "block", marginBottom: "4px" }}>Truck Restrictions Applied:</b>
+          <ul style={{ margin: 0, paddingLeft: "16px", color: "#991b1b", fontSize: "0.8rem" }}>
+            {selected.warnings.map((w, i) => <li key={i}>{w}</li>)}
+          </ul>
+        </div>
+      )}
+
       <div style={{ marginTop: "12px", padding: "10px", background: "#f8fafc", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
         <label style={{ fontSize: "0.85rem", fontWeight: "bold", display: "block", marginBottom: "6px" }}>
           Hours of Service (HOS) remaining:

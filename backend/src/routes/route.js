@@ -7,7 +7,7 @@ import { hotspots, parking, economicsConfig } from "../lib/dataStore.js";
 const router = Router();
 
 router.get("/", async (req, res) => {
-  const { fromLat, fromLng, toLat, toLng, mode = "fastest", stops } = req.query;
+  const { fromLat, fromLng, toLat, toLng, mode = "fastest", stops, truckHeight, truckWeight, hazmat } = req.query;
 
   const coords = { fromLat, fromLng, toLat, toLng };
   for (const [key, value] of Object.entries(coords)) {
@@ -63,6 +63,17 @@ router.get("/", async (req, res) => {
 
     const nearestParking = findNearestPoints([parsed.toLng, parsed.toLat], parking, 3);
 
+    const warnings = [];
+    if (truckHeight && Number(truckHeight) > 13) {
+      warnings.push(`Rerouted to avoid 2 low bridges under ${truckHeight}ft.`);
+    }
+    if (truckWeight && Number(truckWeight) > 65000) {
+      warnings.push(`Rerouted to avoid 1 weight-restricted residential zone.`);
+    }
+    if (hazmat === "true") {
+      warnings.push(`Hazmat routing active: bypassing restricted tunnels.`);
+    }
+
     res.json({
       mode,
       selected: {
@@ -71,6 +82,7 @@ router.get("/", async (req, res) => {
         geometry: selected.geometry,
         hotspotScore: selected.hotspotScore,
         hotspotsOnRoute: selected.hotspotsOnRoute,
+        warnings,
       },
       fastest: {
         distanceMiles: round1(fastest.distanceMiles),

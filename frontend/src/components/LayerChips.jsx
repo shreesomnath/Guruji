@@ -15,6 +15,9 @@ export default function LayerChips({ layers, setLayers }) {
       <button className={`chip hotspots ${layers.hotspots ? "active" : ""}`} onClick={() => toggleLayer("hotspots")}>
         ⚠️ Hotspots
       </button>
+      <button className={`chip traffic ${layers.traffic ? "active" : ""}`} onClick={() => toggleLayer("traffic")}>
+        🚥 Traffic
+      </button>
     </div>
   );
 }

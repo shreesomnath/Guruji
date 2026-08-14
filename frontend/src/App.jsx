@@ -28,7 +28,13 @@ export default function App() {
   const [restAreas, setRestAreas] = useState(null);
   const [parking, setParking] = useState(null);
   const [gasStations, setGasStations] = useState(null);
-  const [layers, setLayers] = useState({ hotspots: false, restAreas: false, parking: false, gasStations: false });
+  const [layers, setLayers] = useState({
+    hotspots: true,
+    restAreas: false,
+    parking: false,
+    gasStations: false,
+    traffic: false,
+  });
 
   const [isPremiumView, setIsPremiumView] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
@@ -82,6 +88,9 @@ export default function App() {
         toLng: toLatLng.lng,
         mode: routeMode,
         stops: stopsList,
+        truckHeight: userProfile.truckHeight,
+        truckWeight: userProfile.truckWeight,
+        hazmat: userProfile.hazmat
       });
       setRouteResult(result);
       return result;
@@ -296,10 +305,11 @@ export default function App() {
           />
         </main>
 
-        <div className="floating-panel">
-          {viewMode === "search" ? (
-            <PlaceSearchCard
-              isPremiumView={isPremiumView}
+        {!tracking && (
+          <div className="floating-panel">
+            {viewMode === "search" ? (
+              <PlaceSearchCard
+                isPremiumView={isPremiumView}
               onTogglePremium={() => setIsPremiumView((v) => !v)}
               place={searchedPlace}
               onSelectPlace={handleSelectPlace}
@@ -352,6 +362,29 @@ export default function App() {
             </div>
           )}
         </div>
+        )}
+
+        {/* Turn-by-Turn Navigation Banner */}
+        {tracking && (
+          <div style={{
+            position: "absolute", top: "24px", left: "50%", transform: "translateX(-50%)",
+            background: "#1a73e8", color: "#fff", padding: "16px 32px", borderRadius: "12px",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.3)", zIndex: 2000, display: "flex", alignItems: "center", gap: "16px",
+            fontFamily: "'Poppins', sans-serif"
+          }}>
+            <span style={{ fontSize: "2.5rem" }}>⤴️</span>
+            <div>
+              <div style={{ fontSize: "1.6rem", fontWeight: "bold" }}>In 500 ft, Turn Right</div>
+              <div style={{ fontSize: "1rem", opacity: 0.9 }}>onto Destination Route</div>
+            </div>
+            <button 
+              onClick={stopTrip} 
+              style={{ marginLeft: "32px", background: "#ef4444", color: "white", border: "none", padding: "10px 20px", borderRadius: "8px", fontWeight: "bold", cursor: "pointer", fontSize: "1rem", boxShadow: "0 2px 6px rgba(0,0,0,0.2)" }}
+            >
+              Exit
+            </button>
+          </div>
+        )}
 
         {/* Profile / Sign In / Dark Mode at Top Right Corner */}
         <div className="top-right-controls" style={{ 
@@ -403,7 +436,9 @@ export default function App() {
           backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.5)"
         }}>
           Developed by 
-          <b style={{ color: "#1a73e8", fontFamily: "'Poppins', sans-serif", marginLeft: "6px" }}>Er. Somnath Luitel</b> 
+          <a href="https://somnathluitel.com.np/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+            <b style={{ color: "#1a73e8", fontFamily: "'Poppins', sans-serif", marginLeft: "6px" }}>Er. Somnath Luitel</b> 
+          </a>
           <span style={{ margin: "0 6px", color: "#94a3b8" }}>&</span> 
           <b style={{ color: "#1a73e8", fontFamily: "'Poppins', sans-serif" }}>Er. Arbin Amagain</b>
         </div>

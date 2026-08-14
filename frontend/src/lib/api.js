@@ -7,11 +7,14 @@ async function getJson(url, options) {
   return body;
 }
 
-export function fetchRoute({ fromLat, fromLng, toLat, toLng, mode, stops }) {
+export function fetchRoute({ fromLat, fromLng, toLat, toLng, mode, stops, truckHeight, truckWeight, hazmat }) {
   const params = new URLSearchParams({ fromLat, fromLng, toLat, toLng, mode });
   if (stops && stops.length > 0) {
     params.set("stops", stops.map((s) => `${s.lat},${s.lng}`).join("|"));
   }
+  if (truckHeight) params.set("truckHeight", truckHeight);
+  if (truckWeight) params.set("truckWeight", truckWeight);
+  if (hazmat) params.set("hazmat", hazmat);
   return getJson(`${API_BASE}/api/route?${params}`);
 }
 

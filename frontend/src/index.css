@@ -263,6 +263,10 @@ button.primary:disabled {
   background: #d7263d;
 }
 
+.chip.traffic.active {
+  background: #f59e0b;
+}
+
 .error {
   color: #d7263d;
   font-size: 0.85rem;
