@@ -34,7 +34,7 @@ export default function App() {
   const [weighStations, setWeighStations] = useState(null);
   const [cameras, setCameras] = useState(null);
   const [layers, setLayers] = useState({
-    hotspots: true,
+    hotspots: false,
     restAreas: false,
     parking: false,
     gasStations: false,
