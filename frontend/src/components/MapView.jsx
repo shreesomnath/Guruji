@@ -63,6 +63,24 @@ function FitRouteBounds({ routePositions, tracking }) {
   return null;
 }
 
+function MapEffect({ origin, destination, routePositions, tracking, searchedPlace, appMode, fleetTrucks }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (appMode === "dispatcher" && fleetTrucks && fleetTrucks.length > 0) {
+      // Zoom out to see all fleet trucks
+      const bounds = L.latLngBounds(fleetTrucks.map(t => [t.lat, t.lng]));
+      map.flyToBounds(bounds, { padding: [50, 50], duration: 1.5 });
+      return;
+    }
+
+    if (routePositions && routePositions.length > 0) {
+      map.fitBounds(L.latLngBounds(routePositions), { padding: [48, 48] });
+    }
+  }, [routePositions, tracking, map]);
+  return null;
+}
+
 export default function MapView({
   origin,
   destination,
@@ -81,7 +99,9 @@ export default function MapView({
   tracking,
   isDarkMode,
   hosHours,
-  tripDurationMinutes
+  tripDurationMinutes,
+  appMode,
+  fleetTrucks
 }) {
   const routePositions = routeGeometry
     ? routeGeometry.coordinates.map(([lng, lat]) => [lat, lng])
@@ -123,8 +143,34 @@ export default function MapView({
 
       <ClickHandler onMapClick={onMapClick} />
       <RecenterOnTracking position={origin} tracking={tracking} />
-      <FitRouteBounds routePositions={routePositions} tracking={tracking} />
-      <FlyToPlace place={searchedPlace} />
+      {/* Render fleet markers in dispatcher mode */}
+      {appMode === "dispatcher" && fleetTrucks?.map(truck => (
+        <Marker 
+          key={truck.id} 
+          position={[truck.lat, truck.lng]} 
+          icon={pinIcon(truck.status === "en-route" ? "#10b981" : truck.status === "delayed" ? "#ef4444" : "#94a3b8")}
+        >
+          <Popup>
+            <div style={{ textAlign: "center" }}>
+              <b>{truck.driver} (Truck #{truck.id})</b>
+              <br/>
+              Status: {truck.status.toUpperCase()}
+              <br/>
+              Speed: {Math.round(truck.speed)} mph
+            </div>
+          </Popup>
+        </Marker>
+      ))}
+
+      <MapEffect 
+        origin={origin} 
+        destination={destination} 
+        routePositions={routePositions} 
+        tracking={tracking}
+        searchedPlace={searchedPlace} 
+        appMode={appMode}
+        fleetTrucks={fleetTrucks}
+      />
 
       {layers.hotspots && <HotspotLayer data={hotspots} />}
       {layers.restAreas && <RestAreaLayer data={restAreas} onAddStop={onAddStop} />}

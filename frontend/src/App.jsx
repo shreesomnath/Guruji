@@ -5,6 +5,7 @@ import PlaceSearchCard from "./components/PlaceSearchCard.jsx";
 import TripSummary from "./components/TripSummary.jsx";
 import EconomicsPanel from "./components/EconomicsPanel.jsx";
 import AccountModal from "./components/AccountModal.jsx";
+import DispatcherPanel from "./components/DispatcherPanel.jsx";
 import { fetchRoute, fetchHotspots, fetchRestAreas, fetchParking, fetchGasStations } from "./lib/api.js";
 import { haversineMiles } from "./lib/geo.js";
 
@@ -39,6 +40,14 @@ export default function App() {
   const [isPremiumView, setIsPremiumView] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
 
+  const [appMode, setAppMode] = useState("driver"); // "driver" | "dispatcher"
+  const [fleetTrucks, setFleetTrucks] = useState([
+    { id: "101", driver: "John D.", status: "en-route", speed: 65, lat: 36.1627, lng: -86.7816, destination: "Memphis, TN" },
+    { id: "102", driver: "Sarah M.", status: "en-route", speed: 58, lat: 35.8456, lng: -86.3903, destination: "Nashville, TN" },
+    { id: "103", driver: "Mike R.", status: "delayed", speed: 0, lat: 35.0456, lng: -85.3097, destination: "Atlanta, GA" },
+    { id: "104", driver: "Alex K.", status: "idle", speed: 0, lat: 35.9606, lng: -83.9207, destination: "Knoxville, TN" }
+  ]);
+
   const [tracking, setTracking] = useState(false);
   const watchIdRef = useRef(null);
   const lastRerouteRef = useRef({ position: null, time: 0 });
@@ -59,6 +68,24 @@ export default function App() {
       );
     }
   }, []);
+
+  useEffect(() => {
+    if (appMode !== "dispatcher") return;
+    const int = setInterval(() => {
+      setFleetTrucks(prev => prev.map(t => {
+        if (t.status === "en-route") {
+          return {
+            ...t,
+            lat: t.lat + (Math.random() - 0.4) * 0.005, // slightly move north/south
+            lng: t.lng + (Math.random() - 0.5) * 0.005, // slightly move east/west
+            speed: Math.max(45, Math.min(75, t.speed + Math.floor((Math.random() - 0.5) * 5)))
+          };
+        }
+        return t;
+      }));
+    }, 2000);
+    return () => clearInterval(int);
+  }, [appMode]);
 
   const handleMapClick = (latlng) => {
     if (viewMode === "search") {
@@ -332,12 +359,21 @@ export default function App() {
             isDarkMode={isDarkMode}
             hosHours={hosHours}
             tripDurationMinutes={routeResult?.selected.durationMinutes}
+            appMode={appMode}
+            fleetTrucks={fleetTrucks}
           />
         </main>
 
         {!tracking && (
           <div className="floating-panel">
-            {viewMode === "search" ? (
+            {appMode === "dispatcher" ? (
+              <DispatcherPanel 
+                trucks={fleetTrucks} 
+                onSelectTruck={(truck) => {
+                  // Pan map to truck (handled in MapView)
+                }} 
+              />
+            ) : viewMode === "search" ? (
               <PlaceSearchCard
                 isPremiumView={isPremiumView}
               onTogglePremium={() => setIsPremiumView((v) => !v)}
@@ -381,9 +417,9 @@ export default function App() {
               savedLocations={userProfile.savedLocations}
             />
           )}
-          {viewMode === "directions" && <TripSummary result={routeResult} hosHours={hosHours} setHosHours={setHosHours} />}
-          {viewMode === "directions" && isPremiumView && routeResult && <EconomicsPanel result={routeResult} />}
-          {viewMode === "directions" && isPremiumView && !routeResult && (
+          {appMode === "driver" && viewMode === "directions" && <TripSummary result={routeResult} hosHours={hosHours} setHosHours={setHosHours} />}
+          {appMode === "driver" && viewMode === "directions" && isPremiumView && routeResult && <EconomicsPanel result={routeResult} />}
+          {appMode === "driver" && viewMode === "directions" && isPremiumView && !routeResult && (
             <div className="panel premium">
               <h2>Freight economics (premium)</h2>
               <p className="hint">
@@ -417,13 +453,23 @@ export default function App() {
           </div>
         )}
 
-        {/* Profile / Sign In / Dark Mode at Top Right Corner */}
+        {/* Profile / Sign In / Dark Mode / Fleet Mode at Top Right Corner */}
         <div className="top-right-controls" style={{ 
           position: "absolute", top: "16px", right: "16px", zIndex: 1000, 
           background: "white", padding: "6px 8px 6px 6px", borderRadius: "24px", 
           boxShadow: "0 2px 8px rgba(0,0,0,0.15)", display: "flex", alignItems: "center", gap: "10px",
           transition: "background 0.3s"
         }}>
+          <button 
+            className="secondary" 
+            onClick={() => setAppMode(appMode === "driver" ? "dispatcher" : "driver")} 
+            style={{ margin: 0, padding: "6px 12px", borderRadius: "16px", fontSize: "0.8rem", background: appMode === "dispatcher" ? "#e0e7ff" : "transparent", border: "1px solid #cbd5e1" }}
+          >
+            {appMode === "driver" ? "📡 Fleet Mode" : "🚗 Driver Mode"}
+          </button>
+          
+          <div style={{ width: "1px", height: "24px", background: "#e2e8f0" }}></div>
+
           <button 
             onClick={toggleDarkMode}
             style={{ 
