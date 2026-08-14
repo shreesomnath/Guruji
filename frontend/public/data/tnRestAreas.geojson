@@ -1,0 +1,20 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "source": "SYNTHETIC — approximate placement modeled on typical TDOT rest area / welcome center spacing along TN interstates. Not an official TDOT list."
+  },
+  "features": [
+    { "type": "Feature", "properties": { "id": "TN-RA-001", "name": "Shelby County Rest Area", "highway": "I-40", "direction": "Eastbound", "amenities": { "fuel": false, "food": false, "restrooms": true, "vending": true, "picnic": true } }, "geometry": { "type": "Point", "coordinates": [-89.55, 35.155] } },
+    { "type": "Feature", "properties": { "id": "TN-RA-002", "name": "Madison County Welcome Center", "highway": "I-40", "direction": "Westbound", "amenities": { "fuel": false, "food": false, "restrooms": true, "vending": true, "picnic": true } }, "geometry": { "type": "Point", "coordinates": [-88.60, 35.63] } },
+    { "type": "Feature", "properties": { "id": "TN-RA-003", "name": "Putnam County Rest Area", "highway": "I-40", "direction": "Eastbound", "amenities": { "fuel": false, "food": false, "restrooms": true, "vending": true, "picnic": false } }, "geometry": { "type": "Point", "coordinates": [-85.30, 36.10] } },
+    { "type": "Feature", "properties": { "id": "TN-RA-004", "name": "Cumberland County Rest Area", "highway": "I-40", "direction": "Westbound", "amenities": { "fuel": false, "food": false, "restrooms": true, "vending": true, "picnic": true } }, "geometry": { "type": "Point", "coordinates": [-84.90, 35.95] } },
+    { "type": "Feature", "properties": { "id": "TN-RA-005", "name": "Montgomery County Welcome Center", "highway": "I-24", "direction": "Southbound", "amenities": { "fuel": false, "food": false, "restrooms": true, "vending": true, "picnic": true } }, "geometry": { "type": "Point", "coordinates": [-87.30, 36.50] } },
+    { "type": "Feature", "properties": { "id": "TN-RA-006", "name": "Marion County Rest Area", "highway": "I-24", "direction": "Eastbound", "amenities": { "fuel": false, "food": false, "restrooms": true, "vending": true, "picnic": false } }, "geometry": { "type": "Point", "coordinates": [-85.75, 35.20] } },
+    { "type": "Feature", "properties": { "id": "TN-RA-007", "name": "Williamson County Rest Area", "highway": "I-65", "direction": "Southbound", "amenities": { "fuel": false, "food": false, "restrooms": true, "vending": true, "picnic": true } }, "geometry": { "type": "Point", "coordinates": [-86.85, 35.75] } },
+    { "type": "Feature", "properties": { "id": "TN-RA-008", "name": "Robertson County Welcome Center", "highway": "I-65", "direction": "Northbound", "amenities": { "fuel": false, "food": false, "restrooms": true, "vending": true, "picnic": true } }, "geometry": { "type": "Point", "coordinates": [-86.68, 36.50] } },
+    { "type": "Feature", "properties": { "id": "TN-RA-009", "name": "Bradley County Rest Area", "highway": "I-75", "direction": "Northbound", "amenities": { "fuel": false, "food": false, "restrooms": true, "vending": true, "picnic": false } }, "geometry": { "type": "Point", "coordinates": [-84.85, 35.30] } },
+    { "type": "Feature", "properties": { "id": "TN-RA-010", "name": "Campbell County Welcome Center", "highway": "I-75", "direction": "Northbound", "amenities": { "fuel": false, "food": false, "restrooms": true, "vending": true, "picnic": true } }, "geometry": { "type": "Point", "coordinates": [-84.15, 36.45] } },
+    { "type": "Feature", "properties": { "id": "TN-RA-011", "name": "Tipton County Rest Area", "highway": "I-55", "direction": "Northbound", "amenities": { "fuel": false, "food": false, "restrooms": true, "vending": true, "picnic": false } }, "geometry": { "type": "Point", "coordinates": [-90.08, 35.45] } },
+    { "type": "Feature", "properties": { "id": "TN-RA-012", "name": "Shelby County Welcome Center", "highway": "I-55", "direction": "Southbound", "amenities": { "fuel": false, "food": false, "restrooms": true, "vending": true, "picnic": true } }, "geometry": { "type": "Point", "coordinates": [-90.06, 35.00] } }
+  ]
+}
