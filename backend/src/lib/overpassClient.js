@@ -44,7 +44,7 @@ async function fetchLiveGasStations() {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "User-Agent": "OPTIMA-FLEET-prototype/0.1 (TSU freight routing student project)",
+        "User-Agent": "OPTIMA-FLEET-prototype/0.1 (Freight routing project)",
         Accept: "application/json",
       },
       body: `data=${encodeURIComponent(buildQuery())}`,

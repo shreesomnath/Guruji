@@ -6,6 +6,7 @@ import TripSummary from "./components/TripSummary.jsx";
 import EconomicsPanel from "./components/EconomicsPanel.jsx";
 import AccountModal from "./components/AccountModal.jsx";
 import DispatcherPanel from "./components/DispatcherPanel.jsx";
+import AnalyticsModal from "./components/AnalyticsModal.jsx";
 import { fetchRoute, fetchHotspots, fetchRestAreas, fetchParking, fetchGasStations, fetchFood, fetchWeighStations, fetchCameras } from "./lib/api.js";
 import { haversineMiles } from "./lib/geo.js";
 
@@ -55,6 +56,7 @@ export default function App() {
     { id: "104", driver: "Alex K.", status: "idle", speed: 0, lat: 35.9606, lng: -83.9207, destination: "Knoxville, TN" }
   ]);
   const [selectedFleetTruck, setSelectedFleetTruck] = useState(null);
+  const [showAnalytics, setShowAnalytics] = useState(false);
 
   const [tracking, setTracking] = useState(false);
   const watchIdRef = useRef(null);
@@ -468,13 +470,21 @@ export default function App() {
           </div>
         )}
 
-        {/* Profile / Sign In / Dark Mode / Fleet Mode at Top Right Corner */}
+        {/* Profile / Sign In / Dark Mode / Fleet Mode / Analytics at Top Right Corner */}
         <div className="top-right-controls" style={{ 
           position: "absolute", top: "16px", right: "16px", zIndex: 1000, 
           background: "white", padding: "6px 8px 6px 6px", borderRadius: "24px", 
           boxShadow: "0 2px 8px rgba(0,0,0,0.15)", display: "flex", alignItems: "center", gap: "10px",
           transition: "background 0.3s"
         }}>
+          <button 
+            className="secondary" 
+            onClick={() => setShowAnalytics(true)} 
+            style={{ margin: 0, padding: "6px 12px", borderRadius: "16px", fontSize: "0.8rem", background: "transparent", border: "1px solid #cbd5e1" }}
+          >
+            📊 Analytics
+          </button>
+          
           <button 
             className="secondary" 
             onClick={() => setAppMode(appMode === "driver" ? "dispatcher" : "driver")} 
@@ -542,6 +552,10 @@ export default function App() {
           onSave={saveProfile} 
           onClose={() => setShowAuthModal(false)} 
         />
+      )}
+
+      {showAnalytics && (
+        <AnalyticsModal onClose={() => setShowAnalytics(false)} />
       )}
     </div>
   );

@@ -41,7 +41,7 @@ router.get("/", async (req, res) => {
     const upstream = await fetch(url, {
       headers: {
         // Nominatim's usage policy requires a real identifying User-Agent.
-        "User-Agent": "OPTIMA-FLEET-prototype/0.1 (TSU freight routing student project)",
+        "User-Agent": "OPTIMA-FLEET-prototype/0.1 (Freight routing project)",
       },
     });
     if (!upstream.ok) {

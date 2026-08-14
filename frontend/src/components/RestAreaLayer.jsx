@@ -20,9 +20,9 @@ export default function RestAreaLayer({ data, onAddStop }) {
                   {p.highway} — {p.direction}
                   <br /><br />
                   <b>Amenities:</b><br/>
-                  🚿 Showers: {Math.random() > 0.3 ? "✅" : "❌"}<br/>
-                  📶 WiFi: {Math.random() > 0.5 ? "✅" : "❌"}<br/>
-                  ⚖️ CAT Scale: {Math.random() > 0.6 ? "✅" : "❌"}
+                  🚿 Showers: {p.amenities?.showers ? "✅" : "❌"}<br/>
+                  📶 WiFi: {p.amenities?.wifi ? "✅" : "❌"}<br/>
+                  ⚖️ CAT Scale: {p.amenities?.scale ? "✅" : "❌"}
                 </p>
                 {onAddStop && (
                   <button
