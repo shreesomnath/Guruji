@@ -18,7 +18,7 @@ export default function PlaceSearchCard({
     <div className="panel">
       <div className="brand-row">
         <div className="brand">
-          <Logo size={34} />
+          <Logo size={52} />
           <div>
             <h2>Guruji</h2>
             <span className="subtitle">OPTIMA-FLEET · Tennessee</span>
