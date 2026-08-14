@@ -53,10 +53,6 @@ export default function PlaceSearchCard({
       <LayerChips layers={layers} setLayers={setLayers} />
 
       {error && <p className="error">{error}</p>}
-      
-      <div style={{ marginTop: "16px", paddingTop: "12px", borderTop: "1px solid #e2e8f0", fontSize: "0.75rem", color: "#64748b", textAlign: "center" }}>
-        Developed by <b>Er. Somnath Luitel</b> & <b>Er. Arbin Amagain</b>
-      </div>
     </div>
   );
 }

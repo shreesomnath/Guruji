@@ -353,6 +353,16 @@ export default function App() {
             {userProfile.name ? "Profile" : "Sign In"}
           </button>
         </div>
+
+        {/* Developer Credits at Bottom Right Corner */}
+        <div style={{ 
+          position: "absolute", bottom: "24px", right: "16px", zIndex: 1000, 
+          background: "rgba(255,255,255,0.9)", padding: "8px 14px", borderRadius: "8px", 
+          boxShadow: "0 2px 8px rgba(0,0,0,0.15)", fontSize: "0.8rem", color: "#1e293b",
+          backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.5)"
+        }}>
+          Developed by <b style={{color: "#2563eb"}}>Er. Somnath Luitel</b> & <b style={{color: "#2563eb"}}>Er. Arbin Amagain</b>
+        </div>
       </div>
       
       {showAuthModal && (
