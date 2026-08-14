@@ -12,7 +12,7 @@ import {
 } from "react-leaflet";
 import { useEffect } from "react";
 import L from "leaflet";
-import { pinIcon, stopIcon } from "../lib/mapIcons.js";
+import { pinIcon, stopIcon, truckIcon } from "../lib/mapIcons.js";
 import HotspotLayer from "./HotspotLayer.jsx";
 import RestAreaLayer from "./RestAreaLayer.jsx";
 import ParkingLayer from "./ParkingLayer.jsx";
@@ -63,10 +63,15 @@ function FitRouteBounds({ routePositions, tracking }) {
   return null;
 }
 
-function MapEffect({ origin, destination, routePositions, tracking, searchedPlace, appMode, fleetTrucks }) {
+function MapEffect({ origin, destination, routePositions, tracking, searchedPlace, appMode, fleetTrucks, selectedFleetTruck }) {
   const map = useMap();
 
   useEffect(() => {
+    if (appMode === "dispatcher" && selectedFleetTruck) {
+      map.flyTo([selectedFleetTruck.lat, selectedFleetTruck.lng], 13, { duration: 1.0 });
+      return;
+    }
+
     if (appMode === "dispatcher" && fleetTrucks && fleetTrucks.length > 0) {
       // Zoom out to see all fleet trucks
       const bounds = L.latLngBounds(fleetTrucks.map(t => [t.lat, t.lng]));
@@ -101,7 +106,8 @@ export default function MapView({
   hosHours,
   tripDurationMinutes,
   appMode,
-  fleetTrucks
+  fleetTrucks,
+  selectedFleetTruck
 }) {
   const routePositions = routeGeometry
     ? routeGeometry.coordinates.map(([lng, lat]) => [lat, lng])
@@ -148,7 +154,7 @@ export default function MapView({
         <Marker 
           key={truck.id} 
           position={[truck.lat, truck.lng]} 
-          icon={pinIcon(truck.status === "en-route" ? "#10b981" : truck.status === "delayed" ? "#ef4444" : "#94a3b8")}
+          icon={truckIcon(truck.status === "en-route" ? "#10b981" : truck.status === "delayed" ? "#ef4444" : "#94a3b8")}
         >
           <Popup>
             <div style={{ textAlign: "center" }}>
@@ -170,6 +176,7 @@ export default function MapView({
         searchedPlace={searchedPlace} 
         appMode={appMode}
         fleetTrucks={fleetTrucks}
+        selectedFleetTruck={selectedFleetTruck}
       />
 
       {layers.hotspots && <HotspotLayer data={hotspots} />}

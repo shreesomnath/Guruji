@@ -46,3 +46,16 @@ export function stopIcon(number) {
     </svg>`;
   return L.divIcon({ html: svg, className: "pin-icon", iconSize: [32, 32], iconAnchor: [16, 16], popupAnchor: [0, -16] });
 }
+
+export function truckIcon(color) {
+  const svg = `
+    <svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="shadow-truck" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#000" flood-opacity="0.4"/>
+        </filter>
+      </defs>
+      <path d="M20,8h-3V6c0-1.1-0.9-2-2-2H3C1.9,4,1,4.9,1,6v11h2c0,1.66,1.34,3,3,3s3-1.34,3-3h6c0,1.66,1.34,3,3,3s3-1.34,3-3h2v-5 L20,8z M6,18c-0.55,0-1-0.45-1-1s0.45-1,1-1s1,0.45,1,1S6.55,18,6,18z M18,18c-0.55,0-1-0.45-1-1s0.45-1,1-1s1,0.45,1,1 S18.55,18,18,18z M17,12V9.5h2.5l1.96,2.5H17z" fill="${color}" stroke="#ffffff" stroke-width="0.5" filter="url(#shadow-truck)" />
+    </svg>`;
+  return L.divIcon({ html: svg, className: "pin-icon", iconSize: [40, 40], iconAnchor: [20, 20], popupAnchor: [0, -20] });
+}

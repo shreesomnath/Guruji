@@ -47,6 +47,7 @@ export default function App() {
     { id: "103", driver: "Mike R.", status: "delayed", speed: 0, lat: 35.0456, lng: -85.3097, destination: "Atlanta, GA" },
     { id: "104", driver: "Alex K.", status: "idle", speed: 0, lat: 35.9606, lng: -83.9207, destination: "Knoxville, TN" }
   ]);
+  const [selectedFleetTruck, setSelectedFleetTruck] = useState(null);
 
   const [tracking, setTracking] = useState(false);
   const watchIdRef = useRef(null);
@@ -361,6 +362,7 @@ export default function App() {
             tripDurationMinutes={routeResult?.selected.durationMinutes}
             appMode={appMode}
             fleetTrucks={fleetTrucks}
+            selectedFleetTruck={selectedFleetTruck}
           />
         </main>
 
@@ -370,7 +372,7 @@ export default function App() {
               <DispatcherPanel 
                 trucks={fleetTrucks} 
                 onSelectTruck={(truck) => {
-                  // Pan map to truck (handled in MapView)
+                  setSelectedFleetTruck(truck);
                 }} 
               />
             ) : viewMode === "search" ? (

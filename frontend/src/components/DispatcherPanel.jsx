@@ -37,25 +37,43 @@ export default function DispatcherPanel({ trucks, onSelectTruck }) {
               onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#f8fafc"}
               onMouseOut={(e) => e.currentTarget.style.backgroundColor = "transparent"}
             >
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "4px" }}>
-                <b style={{ color: "#334155" }}>{truck.driver}</b>
-                <span style={{ 
-                  fontSize: "0.75rem", padding: "2px 6px", borderRadius: "4px", fontWeight: "bold",
-                  backgroundColor: truck.status === "en-route" ? "#dcfce7" : truck.status === "delayed" ? "#fee2e2" : "#f1f5f9",
-                  color: truck.status === "en-route" ? "#166534" : truck.status === "delayed" ? "#991b1b" : "#475569"
+              <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+                {/* Driver Avatar */}
+                <div style={{
+                  width: "40px", height: "40px", borderRadius: "50%", background: "#f1f5f9", 
+                  display: "flex", justifyContent: "center", alignItems: "center", fontWeight: "bold",
+                  color: "#64748b", border: "1px solid #e2e8f0"
                 }}>
-                  {truck.status.toUpperCase()}
-                </span>
-              </div>
-              <div style={{ fontSize: "0.8rem", color: "#64748b", display: "flex", justifyContent: "space-between" }}>
-                <span>Truck #{truck.id}</span>
-                <span>{truck.speed} mph</span>
-              </div>
-              {truck.destination && (
-                <div style={{ fontSize: "0.8rem", color: "#64748b", marginTop: "4px" }}>
-                  📍 Dest: {truck.destination}
+                  {truck.driver.charAt(0)}
                 </div>
-              )}
+                
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "4px", alignItems: "center" }}>
+                    <b style={{ color: "#334155", fontSize: "0.95rem" }}>{truck.driver}</b>
+                    <span style={{ 
+                      fontSize: "0.7rem", padding: "2px 8px", borderRadius: "12px", fontWeight: "bold",
+                      backgroundColor: truck.status === "en-route" ? "#dcfce7" : truck.status === "delayed" ? "#fee2e2" : "#f1f5f9",
+                      color: truck.status === "en-route" ? "#166534" : truck.status === "delayed" ? "#991b1b" : "#475569"
+                    }}>
+                      {truck.status.toUpperCase()}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: "0.8rem", color: "#64748b", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span>🚚 #{truck.id}</span>
+                    <span style={{ 
+                      fontWeight: "bold", 
+                      color: truck.speed > 0 ? (truck.speed > 60 ? "#10b981" : "#f59e0b") : "#ef4444" 
+                    }}>
+                      {Math.round(truck.speed)} mph
+                    </span>
+                  </div>
+                  {truck.destination && (
+                    <div style={{ fontSize: "0.75rem", color: "#94a3b8", marginTop: "4px", display: "flex", alignItems: "center", gap: "4px" }}>
+                      📍 To: {truck.destination}
+                    </div>
+                  )}
+                </div>
+              </div>
             </li>
           ))}
         </ul>
