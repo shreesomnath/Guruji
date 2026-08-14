@@ -27,6 +27,9 @@ export default function LayerChips({ layers, setLayers }) {
       <button className={`chip scales ${layers.scales ? "active" : ""}`} onClick={() => toggleLayer("scales")}>
         ⚖️ Scales
       </button>
+      <button className={`chip cameras ${layers.cameras ? "active" : ""}`} onClick={() => toggleLayer("cameras")}>
+        📸 Cameras
+      </button>
     </div>
   );
 }

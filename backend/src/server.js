@@ -10,6 +10,7 @@ import geocodeRouter from "./routes/geocode.js";
 import gasStationsRouter from "./routes/gasStations.js";
 import foodRouter from "./routes/food.js";
 import weighStationsRouter from "./routes/weighStations.js";
+import camerasRouter from "./routes/cameras.js";
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -28,6 +29,7 @@ app.use("/api/geocode", geocodeRouter);
 app.use("/api/gas-stations", gasStationsRouter);
 app.use("/api/food", foodRouter);
 app.use("/api/weigh-stations", weighStationsRouter);
+app.use("/api/cameras", camerasRouter);
 
 app.listen(PORT, () => {
   console.log(`OPTIMA-FLEET backend listening on http://localhost:${PORT}`);

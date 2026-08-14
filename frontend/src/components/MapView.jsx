@@ -4,6 +4,7 @@ import {
   LayersControl,
   ZoomControl,
   Polyline,
+  Polygon,
   Marker,
   CircleMarker,
   Popup,
@@ -20,6 +21,14 @@ import GasStationLayer from "./GasStationLayer.jsx";
 import TrafficLayer from "./TrafficLayer.jsx";
 import FoodLayer from "./FoodLayer.jsx";
 import WeighStationLayer from "./WeighStationLayer.jsx";
+import CameraLayer from "./CameraLayer.jsx";
+
+const WAREHOUSE_GEOFENCE = [
+  [36.17, -86.81],
+  [36.17, -86.75],
+  [36.13, -86.75],
+  [36.13, -86.81]
+];
 
 const TENNESSEE_CENTER = [35.86, -86.4];
 const ORIGIN_ICON = pinIcon("#22c55e");
@@ -104,6 +113,7 @@ export default function MapView({
   gasStations,
   foodPlaces,
   weighStations,
+  cameras,
   layers,
   tracking,
   isDarkMode,
@@ -161,6 +171,17 @@ export default function MapView({
 
       <ClickHandler onMapClick={onMapClick} />
       <RecenterOnTracking position={origin} tracking={tracking} />
+
+      {/* Render Warehouse Geofence in Dispatcher Mode */}
+      {appMode === "dispatcher" && (
+        <Polygon 
+          positions={WAREHOUSE_GEOFENCE} 
+          pathOptions={{ color: "#ef4444", fillColor: "#ef4444", fillOpacity: 0.15, weight: 2, dashArray: "5, 5" }}
+        >
+          <Popup><b>Nashville Main Hub</b><br/>Restricted Geofence Area</Popup>
+        </Polygon>
+      )}
+
       {/* Render fleet markers in dispatcher mode */}
       {appMode === "dispatcher" && fleetTrucks?.map(truck => (
         <Marker 
@@ -197,6 +218,7 @@ export default function MapView({
       {layers.gasStations && <GasStationLayer data={gasStations} onAddStop={onAddStop} />}
       {layers.food && <FoodLayer data={foodPlaces} onAddStop={onAddStop} />}
       {layers.scales && <WeighStationLayer data={weighStations} onAddStop={onAddStop} />}
+      {layers.cameras && <CameraLayer data={cameras} onAddStop={onAddStop} />}
 
       {/* Render unselected alternatives first so they are underneath the selected route */}
       {alternatives && alternatives.map((alt) => {

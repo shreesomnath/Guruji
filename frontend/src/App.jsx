@@ -6,7 +6,7 @@ import TripSummary from "./components/TripSummary.jsx";
 import EconomicsPanel from "./components/EconomicsPanel.jsx";
 import AccountModal from "./components/AccountModal.jsx";
 import DispatcherPanel from "./components/DispatcherPanel.jsx";
-import { fetchRoute, fetchHotspots, fetchRestAreas, fetchParking, fetchGasStations, fetchFood, fetchWeighStations } from "./lib/api.js";
+import { fetchRoute, fetchHotspots, fetchRestAreas, fetchParking, fetchGasStations, fetchFood, fetchWeighStations, fetchCameras } from "./lib/api.js";
 import { haversineMiles } from "./lib/geo.js";
 
 const REROUTE_MIN_MOVE_MILES = 0.15;
@@ -31,6 +31,7 @@ export default function App() {
   const [gasStations, setGasStations] = useState(null);
   const [foodPlaces, setFoodPlaces] = useState(null);
   const [weighStations, setWeighStations] = useState(null);
+  const [cameras, setCameras] = useState(null);
   const [layers, setLayers] = useState({
     hotspots: true,
     restAreas: false,
@@ -40,6 +41,7 @@ export default function App() {
     food: false,
     weather: false,
     scales: false,
+    cameras: false,
   });
 
   const [isPremiumView, setIsPremiumView] = useState(false);
@@ -65,6 +67,7 @@ export default function App() {
     fetchGasStations().then(setGasStations).catch((e) => setError(e.message));
     fetchFood().then(setFoodPlaces).catch((e) => setError(e.message));
     fetchWeighStations().then(setWeighStations).catch((e) => setError(e.message));
+    fetchCameras().then(setCameras).catch((e) => setError(e.message));
 
     // Silently try to bias address search toward wherever the user actually
     // is. Failure here is fine — search just falls back to a TN-wide bias.
@@ -364,6 +367,7 @@ export default function App() {
             gasStations={gasStations}
             foodPlaces={foodPlaces}
             weighStations={weighStations}
+            cameras={cameras}
             layers={layers}
             tracking={tracking}
             isDarkMode={isDarkMode}

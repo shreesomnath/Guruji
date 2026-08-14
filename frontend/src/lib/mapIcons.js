@@ -67,3 +67,7 @@ export function foodIcon() {
 export function scaleIcon() {
   return badgeIcon("⚖️", { color: "#8b5cf6", size: 30 });
 }
+
+export function cameraIcon() {
+  return badgeIcon("📸", { color: "#0f172a", size: 26 });
+}

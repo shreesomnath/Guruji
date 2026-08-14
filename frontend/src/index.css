@@ -279,6 +279,11 @@ button.primary:disabled {
   background: #8b5cf6;
 }
 
+.chip.cameras.active {
+  background: #0f172a;
+  color: white;
+}
+
 .error {
   color: #d7263d;
   font-size: 0.85rem;

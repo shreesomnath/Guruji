@@ -55,3 +55,7 @@ export function fetchFood() {
 export function fetchWeighStations() {
   return getJson(`${API_BASE}/api/weigh-stations`);
 }
+
+export function fetchCameras() {
+  return getJson(`${API_BASE}/api/cameras`);
+}
