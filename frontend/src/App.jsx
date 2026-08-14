@@ -227,8 +227,38 @@ export default function App() {
       { enableHighAccuracy: true, maximumAge: 5000 }
     );
 
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(new SpeechSynthesisUtterance("Starting route to destination. Drive safely."));
+    }
+
     setTracking(true);
   };
+
+  useEffect(() => {
+    if (!tracking) return;
+    
+    const instructions = [
+      "In 500 feet, turn right.",
+      "Continue straight for 2 miles.",
+      "Use the left lane to take the exit.",
+      "Merge onto the highway.",
+      "Keep left at the fork.",
+      "Truck weigh station approaching in 5 miles."
+    ];
+    
+    const interval = setInterval(() => {
+      const instruction = instructions[Math.floor(Math.random() * instructions.length)];
+      
+      // Update the banner UI text (you would normally bind this to a state variable, 
+      // but for this quick simulation we'll just speak it)
+      if (window.speechSynthesis) {
+        window.speechSynthesis.speak(new SpeechSynthesisUtterance(instruction));
+      }
+    }, 15000); // Simulate an instruction every 15 seconds
+    
+    return () => clearInterval(interval);
+  }, [tracking]);
 
   const stopTrip = () => {
     if (watchIdRef.current !== null) {
