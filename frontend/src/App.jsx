@@ -339,10 +339,20 @@ export default function App() {
         {/* Profile / Sign In at Top Right Corner */}
         <div style={{ 
           position: "absolute", top: "16px", right: "16px", zIndex: 1000, 
-          background: "white", padding: "6px 8px 6px 16px", borderRadius: "24px", 
-          boxShadow: "0 2px 8px rgba(0,0,0,0.15)", display: "flex", alignItems: "center", gap: "12px" 
+          background: "white", padding: "6px 8px 6px 6px", borderRadius: "24px", 
+          boxShadow: "0 2px 8px rgba(0,0,0,0.15)", display: "flex", alignItems: "center", gap: "10px" 
         }}>
-          <span style={{ fontSize: "0.85rem", fontWeight: "bold", color: "#334155" }}>
+          {/* Profile Avatar Placeholder */}
+          <div style={{
+            width: "32px", height: "32px", borderRadius: "50%", background: "#e2e8f0", 
+            display: "flex", justifyContent: "center", alignItems: "center", overflow: "hidden"
+          }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#94a3b8" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" />
+            </svg>
+          </div>
+          
+          <span style={{ fontSize: "0.85rem", fontWeight: "bold", color: "#334155", paddingLeft: "2px" }}>
             {userProfile.name ? `Hello, ${userProfile.name}` : "Guest"}
           </span>
           <button 
