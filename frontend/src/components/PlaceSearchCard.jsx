@@ -21,7 +21,11 @@ export default function PlaceSearchCard({
           <Logo size={74} />
           <div>
             <h2>Guruji</h2>
-            <span className="subtitle">OPTIMA-FLEET · Tennessee</span>
+            <div className="subtitle">
+              <span style={{ color: "#334155" }}>OPTIMA-FLEET</span>
+              <span style={{ color: "#94a3b8", margin: "0 4px" }}>·</span>
+              <span style={{ color: "#10b981" }}>Tennessee</span>
+            </div>
           </div>
         </div>
         <label className="premium-toggle">
