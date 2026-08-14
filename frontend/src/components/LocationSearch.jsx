@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { fetchGeocode } from "../lib/api.js";
 
-export default function LocationSearch({ label, placeholder, onSelect, near, initialValue, onUseMyLocation }) {
+export default function LocationSearch({ label, placeholder, onSelect, near, initialValue, onUseMyLocation, savedLocations = [] }) {
   const [query, setQuery] = useState(initialValue || "");
   const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
@@ -67,12 +67,11 @@ export default function LocationSearch({ label, placeholder, onSelect, near, ini
                   📍 Current Location
                 </li>
               )}
-              <li onMouseDown={() => handleSelect({ lat: 36.1627, lng: -86.7816, label: "Home (Nashville, TN)" })}>
-                🏠 Home (Nashville, TN)
-              </li>
-              <li onMouseDown={() => handleSelect({ lat: 35.1495, lng: -90.0490, label: "Warehouse (Memphis, TN)" })}>
-                📦 Warehouse (Memphis, TN)
-              </li>
+              {savedLocations.map((loc, i) => (
+                <li key={`saved-${i}`} onMouseDown={() => handleSelect(loc)}>
+                  {loc.icon || "⭐"} {loc.label}
+                </li>
+              ))}
             </>
           ) : results.length > 0 ? (
             results.map((r, i) => (

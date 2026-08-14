@@ -4,6 +4,7 @@ import RouteForm from "./components/RouteForm.jsx";
 import PlaceSearchCard from "./components/PlaceSearchCard.jsx";
 import TripSummary from "./components/TripSummary.jsx";
 import EconomicsPanel from "./components/EconomicsPanel.jsx";
+import AccountModal from "./components/AccountModal.jsx";
 import { fetchRoute, fetchHotspots, fetchRestAreas, fetchParking, fetchGasStations } from "./lib/api.js";
 import { haversineMiles } from "./lib/geo.js";
 
@@ -242,6 +243,19 @@ export default function App() {
     }));
   };
 
+  const [userProfile, setUserProfile] = useState(() => {
+    const saved = localStorage.getItem("guruji_profile");
+    if (saved) return JSON.parse(saved);
+    return { name: "", savedLocations: [] };
+  });
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  const saveProfile = (newProfile) => {
+    setUserProfile(newProfile);
+    localStorage.setItem("guruji_profile", JSON.stringify(newProfile));
+    setShowAuthModal(false);
+  };
+
   return (
     <div className="app">
       <div className="app-body">
@@ -266,6 +280,16 @@ export default function App() {
         </main>
 
         <div className="floating-panel">
+          {/* User profile widget at top */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px", padding: "8px", background: "#f8fafc", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
+            <span style={{ fontSize: "0.85rem", fontWeight: "bold", color: "#334155" }}>
+              {userProfile.name ? `👋 Hello, ${userProfile.name}` : "Not signed in"}
+            </span>
+            <button className="link-button" onClick={() => setShowAuthModal(true)} style={{ padding: "4px 8px", margin: 0 }}>
+              {userProfile.name ? "Settings" : "Create Account / Sign In"}
+            </button>
+          </div>
+
           {viewMode === "search" ? (
             <PlaceSearchCard
               isPremiumView={isPremiumView}
@@ -278,6 +302,7 @@ export default function App() {
               layers={layers}
               setLayers={setLayers}
               error={geoError || error}
+              savedLocations={userProfile.savedLocations}
             />
           ) : (
             <RouteForm
@@ -305,6 +330,7 @@ export default function App() {
               tracking={tracking}
               onStartTrip={startTrip}
               onStopTrip={stopTrip}
+              savedLocations={userProfile.savedLocations}
             />
           )}
           {viewMode === "directions" && <TripSummary result={routeResult} />}
@@ -320,6 +346,14 @@ export default function App() {
           )}
         </div>
       </div>
+      
+      {showAuthModal && (
+        <AccountModal 
+          userProfile={userProfile} 
+          onSave={saveProfile} 
+          onClose={() => setShowAuthModal(false)} 
+        />
+      )}
     </div>
   );
 }

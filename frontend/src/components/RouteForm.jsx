@@ -26,6 +26,7 @@ export default function RouteForm({
   tracking,
   onStartTrip,
   onStopTrip,
+  savedLocations = []
 }) {
   return (
     <div className="panel">
@@ -49,6 +50,7 @@ export default function RouteForm({
         near={searchNear}
         initialValue={origin?.label}
         onUseMyLocation={onUseMyLocation}
+        savedLocations={savedLocations}
       />
       {geoError && <p className="error">{geoError}</p>}
 
@@ -58,6 +60,7 @@ export default function RouteForm({
         onSelect={onSelectDestination}
         near={origin || searchNear}
         initialValue={destination?.label}
+        savedLocations={savedLocations}
       />
 
       <LayerChips layers={layers} setLayers={setLayers} />
@@ -67,6 +70,7 @@ export default function RouteForm({
         placeholder="Search a stop to add…"
         onSelect={(latlng, label) => onAddStop(latlng, label)}
         near={origin || searchNear}
+        savedLocations={savedLocations}
       />
       {stops.length > 0 && (
         <ul className="stop-list">
