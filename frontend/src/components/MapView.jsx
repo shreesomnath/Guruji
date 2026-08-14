@@ -78,10 +78,13 @@ export default function MapView({
   gasStations,
   layers,
   tracking,
+  isDarkMode
 }) {
   const routePositions = routeGeometry
     ? routeGeometry.coordinates.map(([lng, lat]) => [lat, lng])
     : null;
+
+  const mapRef = useRef();
 
   return (
     <MapContainer center={TENNESSEE_CENTER} zoom={7} zoomControl={false} style={{ height: "100%", width: "100%" }}>
@@ -89,8 +92,12 @@ export default function MapView({
       <LayersControl position="bottomright">
         <LayersControl.BaseLayer checked name="Map">
           <TileLayer
+            key={isDarkMode ? "dark" : "light"}
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+            url={isDarkMode 
+              ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+              : "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+            }
           />
         </LayersControl.BaseLayer>
         <LayersControl.BaseLayer name="Satellite">

@@ -256,8 +256,20 @@ export default function App() {
     setShowAuthModal(false);
   };
 
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return localStorage.getItem("guruji_theme") === "dark";
+  });
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(prev => {
+      const next = !prev;
+      localStorage.setItem("guruji_theme", next ? "dark" : "light");
+      return next;
+    });
+  };
+
   return (
-    <div className="app">
+    <div className={`app ${isDarkMode ? "dark-mode" : ""}`}>
       <div className="app-body">
         <main className="map-wrap">
           <MapView
@@ -276,6 +288,7 @@ export default function App() {
             gasStations={gasStations}
             layers={layers}
             tracking={tracking}
+            isDarkMode={isDarkMode}
           />
         </main>
 
@@ -336,12 +349,26 @@ export default function App() {
           )}
         </div>
 
-        {/* Profile / Sign In at Top Right Corner */}
-        <div style={{ 
+        {/* Profile / Sign In / Dark Mode at Top Right Corner */}
+        <div className="top-right-controls" style={{ 
           position: "absolute", top: "16px", right: "16px", zIndex: 1000, 
           background: "white", padding: "6px 8px 6px 6px", borderRadius: "24px", 
-          boxShadow: "0 2px 8px rgba(0,0,0,0.15)", display: "flex", alignItems: "center", gap: "10px" 
+          boxShadow: "0 2px 8px rgba(0,0,0,0.15)", display: "flex", alignItems: "center", gap: "10px",
+          transition: "background 0.3s"
         }}>
+          <button 
+            onClick={toggleDarkMode}
+            style={{ 
+              background: "none", border: "none", fontSize: "1.2rem", cursor: "pointer", 
+              padding: "4px", display: "flex", alignItems: "center", justifyContent: "center" 
+            }}
+            title="Toggle Dark Mode"
+          >
+            {isDarkMode ? "🌙" : "☀️"}
+          </button>
+          
+          <div style={{ width: "1px", height: "24px", background: "#e2e8f0" }}></div>
+
           {/* Profile Avatar Placeholder */}
           <div style={{
             width: "32px", height: "32px", borderRadius: "50%", background: "#e2e8f0", 

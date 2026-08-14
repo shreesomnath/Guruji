@@ -479,3 +479,83 @@ button.primary:disabled {
   background: #1d4ed8;
   color: #fff;
 }
+
+/* Dark Mode Overrides */
+.dark-mode .floating-panel,
+.dark-mode .panel,
+.dark-mode .top-right-controls {
+  background: #202124 !important;
+  color: #e8eaed;
+}
+
+.dark-mode .panel h2 {
+  color: #fff;
+}
+
+.dark-mode .subtitle {
+  color: #8ab4f8;
+}
+
+.dark-mode .hint,
+.dark-mode .search-hint {
+  color: #9aa0a6;
+}
+
+.dark-mode .field-label {
+  color: #8ab4f8;
+}
+
+.dark-mode .location-search input[type="text"] {
+  background: #303134;
+  color: #e8eaed;
+  border-color: #5f6368;
+}
+
+.dark-mode .location-search input[type="text"]:focus {
+  border-color: #8ab4f8;
+  box-shadow: 0 0 0 2px rgba(138, 180, 248, 0.2);
+}
+
+.dark-mode .search-results {
+  background: #303134;
+  border-color: #5f6368;
+}
+
+.dark-mode .search-results li {
+  border-color: #444;
+}
+
+.dark-mode .search-results li:hover {
+  background: #3c4043;
+}
+
+.dark-mode .place-card {
+  background: #303134;
+  border-color: #5f6368;
+  color: #e8eaed;
+}
+
+.dark-mode .chip {
+  background: #303134;
+  color: #e8eaed;
+  border-color: #5f6368;
+}
+
+.dark-mode .chip:hover {
+  background: #3c4043;
+}
+
+.dark-mode .back-button {
+  background: #303134;
+  color: #e8eaed;
+  border-color: #5f6368;
+}
+
+.dark-mode .panel.premium {
+  background: #28292c;
+  border-top: 3px solid #fbbc04;
+}
+
+.dark-mode .premium-toggle {
+  color: #fbbc04;
+}
