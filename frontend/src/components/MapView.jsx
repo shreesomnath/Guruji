@@ -71,6 +71,7 @@ export default function MapView({
   onAddStop,
   routeGeometry,
   alternatives,
+  onSelectAlternative,
   hotspots,
   restAreas,
   parking,
@@ -134,12 +135,22 @@ export default function MapView({
         
         const altPositions = alt.geometry.coordinates.map(([lng, lat]) => [lat, lng]);
         return (
-          <Polyline key={alt.id} positions={altPositions} pathOptions={{ color: "#8a94a6", weight: 5, opacity: 0.6 }}>
+          <Polyline 
+            key={alt.id} 
+            positions={altPositions} 
+            pathOptions={{ color: "#8a94a6", weight: 7, opacity: 0.6 }}
+            eventHandlers={{ 
+              click: () => onSelectAlternative && onSelectAlternative(alt),
+              mouseover: (e) => e.target.setStyle({ color: "#60a5fa", opacity: 0.8 }),
+              mouseout: (e) => e.target.setStyle({ color: "#8a94a6", opacity: 0.6 })
+            }}
+          >
             <Popup>
               <b>Alternative Route</b><br/>
               Time: {alt.durationMinutes} min<br/>
               Distance: {alt.distanceMiles} mi<br/>
-              Hotspots: {alt.hotspotScore}
+              Hotspots: {alt.hotspotScore}<br/><br/>
+              <button onClick={() => onSelectAlternative && onSelectAlternative(alt)}>Select this route</button>
             </Popup>
           </Polyline>
         );

@@ -228,6 +228,20 @@ export default function App() {
     setTracking(false);
   };
 
+  const handleSelectAlternative = (alt) => {
+    setRouteResult((prev) => ({
+      ...prev,
+      mode: "custom",
+      selected: {
+        distanceMiles: alt.distanceMiles,
+        durationMinutes: alt.durationMinutes,
+        geometry: alt.geometry,
+        hotspotScore: alt.hotspotScore,
+        hotspotsOnRoute: alt.hotspotsOnRoute || [],
+      },
+    }));
+  };
+
   return (
     <div className="app">
       <div className="app-body">
@@ -241,6 +255,7 @@ export default function App() {
             onAddStop={handleAddStop}
             routeGeometry={routeResult?.selected.geometry}
             alternatives={routeResult?.alternatives}
+            onSelectAlternative={handleSelectAlternative}
             hotspots={hotspots}
             restAreas={restAreas}
             parking={parking}

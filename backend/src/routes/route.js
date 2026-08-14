@@ -90,6 +90,7 @@ router.get("/", async (req, res) => {
         durationMinutes: round1(s.durationMinutes),
         hotspotScore: s.hotspotScore,
         geometry: s.geometry,
+        hotspotsOnRoute: s.hotspotsOnRoute,
       })),
       economics: mode === "safest" ? economicsSafest : economicsFastest,
       nearestParking,
