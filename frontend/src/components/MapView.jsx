@@ -156,11 +156,38 @@ export default function MapView({
       </LayersControl>
 
       {layers.weather && (
-        <TileLayer
-          url="https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913/{z}/{x}/{y}.png"
-          opacity={0.6}
-          attribution="Weather data © IEM Nexrad"
-        />
+        <>
+          <TileLayer
+            url="https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913/{z}/{x}/{y}.png"
+            opacity={0.6}
+            attribution="Weather data © IEM Nexrad"
+          />
+          <div style={{
+            position: "absolute", bottom: "30px", left: "20px", zIndex: 1000,
+            background: isDarkMode ? "rgba(30,41,59,0.9)" : "rgba(255,255,255,0.9)", 
+            padding: "10px", borderRadius: "8px",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.2)", fontSize: "0.8rem", 
+            color: isDarkMode ? "#f8fafc" : "#334155",
+            pointerEvents: "none"
+          }}>
+            <h4 style={{ margin: "0 0 6px 0", fontSize: "0.85rem" }}>Radar Intensity</h4>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
+              <div style={{ width: "16px", height: "16px", background: "#00FF00" }}></div> <span>Light Rain</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
+              <div style={{ width: "16px", height: "16px", background: "#FFFF00" }}></div> <span>Moderate Rain</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
+              <div style={{ width: "16px", height: "16px", background: "#FFA500" }}></div> <span>Heavy Rain</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
+              <div style={{ width: "16px", height: "16px", background: "#FF0000" }}></div> <span>Severe Storms</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <div style={{ width: "16px", height: "16px", background: "#800080" }}></div> <span>Extreme / Hail</span>
+            </div>
+          </div>
+        </>
       )}
 
       <ClickHandler onMapClick={onMapClick} />
