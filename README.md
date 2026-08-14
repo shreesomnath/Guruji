@@ -2,6 +2,8 @@
 
 **Developers:** Er. Somnath Luitel, Er. Arbin Amagain
 
+![Guruji Application Screenshot](./frontend/public/application.png)
+
 A web app that helps Tennessee truck drivers find the safest/fastest route (with crash hotspots,
 truck parking, rest areas, and gas stations) and gives freight companies a cost breakdown per
 route. Built as the Task 12 software prototype for **OPTIMA-FLEET**, a TSU research project on
