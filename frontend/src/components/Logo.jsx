@@ -1,7 +1,7 @@
 export default function Logo({ size = 34 }) {
   return (
     <img 
-      src="/logo.png" 
+      src={`${import.meta.env.BASE_URL}logo.png`} 
       alt="Guruji logo" 
       width={size} 
       height={size} 

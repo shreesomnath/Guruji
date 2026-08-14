@@ -1,5 +1,7 @@
 # Optima Fleet
 
+![Optima Fleet Application](frontend/public/application.png)
+
 Optima Fleet is a world-class, AI-driven freight logistics and fleet management platform designed to revolutionize the way transportation companies manage their truck routes, optimize freight economics, and track live fleet data. 
 
 ## The Need for Optima Fleet
