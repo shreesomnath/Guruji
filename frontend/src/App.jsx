@@ -260,6 +260,8 @@ export default function App() {
     return localStorage.getItem("guruji_theme") === "dark";
   });
 
+  const [hosHours, setHosHours] = useState("");
+
   const toggleDarkMode = () => {
     setIsDarkMode(prev => {
       const next = !prev;
@@ -289,6 +291,8 @@ export default function App() {
             layers={layers}
             tracking={tracking}
             isDarkMode={isDarkMode}
+            hosHours={hosHours}
+            tripDurationMinutes={routeResult?.selected.durationMinutes}
           />
         </main>
 
@@ -336,7 +340,7 @@ export default function App() {
               savedLocations={userProfile.savedLocations}
             />
           )}
-          {viewMode === "directions" && <TripSummary result={routeResult} />}
+          {viewMode === "directions" && <TripSummary result={routeResult} hosHours={hosHours} setHosHours={setHosHours} />}
           {viewMode === "directions" && isPremiumView && routeResult && <EconomicsPanel result={routeResult} />}
           {viewMode === "directions" && isPremiumView && !routeResult && (
             <div className="panel premium">

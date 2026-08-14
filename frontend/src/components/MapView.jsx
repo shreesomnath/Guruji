@@ -78,7 +78,9 @@ export default function MapView({
   gasStations,
   layers,
   tracking,
-  isDarkMode
+  isDarkMode,
+  hosHours,
+  tripDurationMinutes
 }) {
   const routePositions = routeGeometry
     ? routeGeometry.coordinates.map(([lng, lat]) => [lat, lng])
@@ -200,6 +202,30 @@ export default function MapView({
           </Popup>
         </Marker>
       ))}
+
+      {hosHours && routePositions && tripDurationMinutes && (() => {
+        const totalDurationHours = tripDurationMinutes / 60;
+        if (Number(hosHours) >= totalDurationHours || Number(hosHours) <= 0) return null;
+        
+        const hosFraction = Number(hosHours) / totalDurationHours;
+        const hosIndex = Math.floor(hosFraction * routePositions.length);
+        if (hosIndex >= routePositions.length) return null;
+        
+        const hosCoord = routePositions[hosIndex];
+        return (
+          <CircleMarker
+            center={hosCoord}
+            radius={12}
+            pathOptions={{ color: "#fff", fillColor: "#ef4444", fillOpacity: 1, weight: 3 }}
+          >
+            <Popup>
+              <b>🛑 HOS Limit Reached</b><br/>
+              You will run out of hours here.<br/>
+              Plan your rest stop nearby!
+            </Popup>
+          </CircleMarker>
+        );
+      })()}
     </MapContainer>
   );
 }

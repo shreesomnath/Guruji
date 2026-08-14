@@ -1,8 +1,6 @@
-import { useState } from "react";
 
-export default function TripSummary({ result }) {
-  const [hosHours, setHosHours] = useState("");
 
+export default function TripSummary({ result, hosHours, setHosHours }) {
   if (!result) return null;
 
   const { selected, economics, nearestParking, mode } = result;
