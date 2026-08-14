@@ -21,6 +21,12 @@ export default function LayerChips({ layers, setLayers }) {
       <button className={`chip food ${layers.food ? "active" : ""}`} onClick={() => toggleLayer("food")}>
         🍔 Food
       </button>
+      <button className={`chip weather ${layers.weather ? "active" : ""}`} onClick={() => toggleLayer("weather")}>
+        🌦️ Weather
+      </button>
+      <button className={`chip scales ${layers.scales ? "active" : ""}`} onClick={() => toggleLayer("scales")}>
+        ⚖️ Scales
+      </button>
     </div>
   );
 }

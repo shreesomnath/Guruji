@@ -271,6 +271,14 @@ button.primary:disabled {
   background: #f43f5e;
 }
 
+.chip.weather.active {
+  background: #3b82f6;
+}
+
+.chip.scales.active {
+  background: #8b5cf6;
+}
+
 .error {
   color: #d7263d;
   font-size: 0.85rem;

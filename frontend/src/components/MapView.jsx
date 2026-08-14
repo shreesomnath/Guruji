@@ -19,6 +19,7 @@ import ParkingLayer from "./ParkingLayer.jsx";
 import GasStationLayer from "./GasStationLayer.jsx";
 import TrafficLayer from "./TrafficLayer.jsx";
 import FoodLayer from "./FoodLayer.jsx";
+import WeighStationLayer from "./WeighStationLayer.jsx";
 
 const TENNESSEE_CENTER = [35.86, -86.4];
 const ORIGIN_ICON = pinIcon("#22c55e");
@@ -102,6 +103,7 @@ export default function MapView({
   parking,
   gasStations,
   foodPlaces,
+  weighStations,
   layers,
   tracking,
   isDarkMode,
@@ -149,6 +151,14 @@ export default function MapView({
         </LayersControl.BaseLayer>
       </LayersControl>
 
+      {layers.weather && (
+        <TileLayer
+          url="https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913/{z}/{x}/{y}.png"
+          opacity={0.6}
+          attribution="Weather data © IEM Nexrad"
+        />
+      )}
+
       <ClickHandler onMapClick={onMapClick} />
       <RecenterOnTracking position={origin} tracking={tracking} />
       {/* Render fleet markers in dispatcher mode */}
@@ -186,6 +196,7 @@ export default function MapView({
       {layers.parking && <ParkingLayer data={parking} onAddStop={onAddStop} />}
       {layers.gasStations && <GasStationLayer data={gasStations} onAddStop={onAddStop} />}
       {layers.food && <FoodLayer data={foodPlaces} onAddStop={onAddStop} />}
+      {layers.scales && <WeighStationLayer data={weighStations} onAddStop={onAddStop} />}
 
       {/* Render unselected alternatives first so they are underneath the selected route */}
       {alternatives && alternatives.map((alt) => {

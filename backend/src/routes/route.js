@@ -74,6 +74,18 @@ router.get("/", async (req, res) => {
       warnings.push(`Hazmat routing active: bypassing restricted tunnels.`);
     }
 
+    // Check for mountain grades
+    let passesMonteagle = false;
+    for (const [lng, lat] of selected.geometry.coordinates) {
+      if (lat > 35.1 && lat < 35.4 && lng > -86.0 && lng < -85.6) {
+        passesMonteagle = true;
+        break;
+      }
+    }
+    if (passesMonteagle) {
+      warnings.push(`⚠️ WARNING: Steep 6% mountain downgrade at Monteagle Pass. Check brakes.`);
+    }
+
     res.json({
       mode,
       selected: {

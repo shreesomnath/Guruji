@@ -63,3 +63,7 @@ export function truckIcon(color) {
 export function foodIcon() {
   return badgeIcon("🍔", { color: "#f43f5e", size: 28 });
 }
+
+export function scaleIcon() {
+  return badgeIcon("⚖️", { color: "#8b5cf6", size: 30 });
+}
