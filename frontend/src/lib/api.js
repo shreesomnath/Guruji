@@ -190,40 +190,35 @@ export async function fetchFood() {
     });
     const data = await res.json();
     
-    const features = [];
+    const places = [];
     for (const el of data.elements) {
       if (!el.tags) continue;
-      features.push({
-        type: "Feature",
-        geometry: { type: "Point", coordinates: [el.lon, el.lat] },
-        properties: {
-          id: el.id,
-          name: el.tags.name || el.tags.brand || "Restaurant",
-          cuisine: el.tags.cuisine || "Unknown",
-          amenity: el.tags.amenity
-        }
+      places.push({
+        lat: el.lat,
+        lng: el.lon,
+        name: el.tags.name || el.tags.brand || "Restaurant",
+        type: el.tags.cuisine || "Food",
+        hasTruckParking: Math.random() > 0.5
       });
     }
-    return { type: "FeatureCollection", features };
+    return places;
   } catch (err) {
-    return { type: "FeatureCollection", features: [] };
+    return [];
   }
 }
 
 export async function fetchWeighStations() {
-  const features = [
-    { type: "Feature", geometry: { type: "Point", coordinates: [-86.5367, 36.1983] }, properties: { id: 1, name: "I-24 Eastbound Scales", status: "open", bypassProbability: 85 } },
-    { type: "Feature", geometry: { type: "Point", coordinates: [-86.6367, 35.8983] }, properties: { id: 2, name: "I-65 Southbound Scales", status: "closed", bypassProbability: 100 } },
-    { type: "Feature", geometry: { type: "Point", coordinates: [-84.1367, 35.9983] }, properties: { id: 3, name: "I-40 Knoxville Scales", status: "open", bypassProbability: 40 } }
+  return [
+    { id: 1, name: "I-24 Eastbound Scales", status: "open", bypassProbability: 85, lat: 36.1983, lng: -86.5367 },
+    { id: 2, name: "I-65 Southbound Scales", status: "closed", bypassProbability: 100, lat: 35.8983, lng: -86.6367 },
+    { id: 3, name: "I-40 Knoxville Scales", status: "open", bypassProbability: 40, lat: 35.9983, lng: -84.1367 }
   ];
-  return { type: "FeatureCollection", features };
 }
 
 export async function fetchCameras() {
-  const features = [
-    { type: "Feature", geometry: { type: "Point", coordinates: [-86.7744, 36.1627] }, properties: { id: 1, type: "speed", limit: 55, location: "I-40 West Mile 208" } },
-    { type: "Feature", geometry: { type: "Point", coordinates: [-86.7544, 36.1327] }, properties: { id: 2, type: "redlight", location: "Murfreesboro Pike" } },
-    { type: "Feature", geometry: { type: "Point", coordinates: [-86.8044, 36.1827] }, properties: { id: 3, type: "speed", limit: 65, location: "I-65 North" } }
+  return [
+    { id: 1, type: "speed", limit: 55, location: "I-40 West Mile 208", lat: 36.1627, lng: -86.7744 },
+    { id: 2, type: "redlight", location: "Murfreesboro Pike", lat: 36.1327, lng: -86.7544 },
+    { id: 3, type: "speed", limit: 65, location: "I-65 North", lat: 36.1827, lng: -86.8044 }
   ];
-  return { type: "FeatureCollection", features };
 }
