@@ -84,8 +84,6 @@ export default function MapView({
     ? routeGeometry.coordinates.map(([lng, lat]) => [lat, lng])
     : null;
 
-  const mapRef = useRef();
-
   return (
     <MapContainer center={TENNESSEE_CENTER} zoom={7} zoomControl={false} style={{ height: "100%", width: "100%" }}>
       <ZoomControl position="bottomright" />
