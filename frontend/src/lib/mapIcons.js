@@ -59,3 +59,7 @@ export function truckIcon(color) {
     </svg>`;
   return L.divIcon({ html: svg, className: "pin-icon", iconSize: [40, 40], iconAnchor: [20, 20], popupAnchor: [0, -20] });
 }
+
+export function foodIcon() {
+  return badgeIcon("🍔", { color: "#f43f5e", size: 28 });
+}

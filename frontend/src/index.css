@@ -267,6 +267,10 @@ button.primary:disabled {
   background: #f59e0b;
 }
 
+.chip.food.active {
+  background: #f43f5e;
+}
+
 .error {
   color: #d7263d;
   font-size: 0.85rem;

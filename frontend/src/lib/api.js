@@ -47,3 +47,7 @@ export function fetchGeocode(query, near) {
 export function fetchGasStations() {
   return getJson(`${API_BASE}/api/gas-stations`);
 }
+
+export function fetchFood() {
+  return getJson(`${API_BASE}/api/food`);
+}

@@ -18,6 +18,7 @@ import RestAreaLayer from "./RestAreaLayer.jsx";
 import ParkingLayer from "./ParkingLayer.jsx";
 import GasStationLayer from "./GasStationLayer.jsx";
 import TrafficLayer from "./TrafficLayer.jsx";
+import FoodLayer from "./FoodLayer.jsx";
 
 const TENNESSEE_CENTER = [35.86, -86.4];
 const ORIGIN_ICON = pinIcon("#22c55e");
@@ -100,6 +101,7 @@ export default function MapView({
   restAreas,
   parking,
   gasStations,
+  foodPlaces,
   layers,
   tracking,
   isDarkMode,
@@ -183,6 +185,7 @@ export default function MapView({
       {layers.restAreas && <RestAreaLayer data={restAreas} onAddStop={onAddStop} />}
       {layers.parking && <ParkingLayer data={parking} onAddStop={onAddStop} />}
       {layers.gasStations && <GasStationLayer data={gasStations} onAddStop={onAddStop} />}
+      {layers.food && <FoodLayer data={foodPlaces} onAddStop={onAddStop} />}
 
       {/* Render unselected alternatives first so they are underneath the selected route */}
       {alternatives && alternatives.map((alt) => {

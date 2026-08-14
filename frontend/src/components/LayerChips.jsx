@@ -18,6 +18,9 @@ export default function LayerChips({ layers, setLayers }) {
       <button className={`chip traffic ${layers.traffic ? "active" : ""}`} onClick={() => toggleLayer("traffic")}>
         🚥 Traffic
       </button>
+      <button className={`chip food ${layers.food ? "active" : ""}`} onClick={() => toggleLayer("food")}>
+        🍔 Food
+      </button>
     </div>
   );
 }
