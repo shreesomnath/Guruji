@@ -15,24 +15,34 @@ export function badgeIcon(emoji, { color = "#333", size = 22, dashed = false } =
 
 export function pinIcon(color) {
   const svg = `
-    <svg width="30" height="42" viewBox="0 0 30 42" xmlns="http://www.w3.org/2000/svg">
-      <path d="M15 0C6.7 0 0 6.7 0 15c0 10.5 15 27 15 27s15-16.5 15-27C30 6.7 23.3 0 15 0z" fill="${color}" stroke="#111" stroke-width="1.5"/>
-      <circle cx="15" cy="15" r="5.5" fill="#fff"/>
+    <svg width="36" height="50" viewBox="0 0 36 50" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="shadow-pin" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M18 2C9.163 2 2 9.163 2 18c0 12 16 28 16 28s16-16 16-28c0-8.837-7.163-16-16-16z" fill="${color}" stroke="#ffffff" stroke-width="2.5" filter="url(#shadow-pin)" />
+      <circle cx="18" cy="18" r="6" fill="#ffffff" filter="url(#shadow-pin)" />
     </svg>`;
   return L.divIcon({
     html: svg,
     className: "pin-icon",
-    iconSize: [30, 42],
-    iconAnchor: [15, 40],
-    popupAnchor: [0, -38],
+    iconSize: [36, 50],
+    iconAnchor: [18, 48],
+    popupAnchor: [0, -45],
   });
 }
 
 export function stopIcon(number) {
   const svg = `
-    <svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="13" cy="13" r="11" fill="#f59e0b" stroke="#111" stroke-width="1.5"/>
-      <text x="13" y="18" font-size="13" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#111">${number}</text>
+    <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="shadow-stop" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/>
+        </filter>
+      </defs>
+      <circle cx="16" cy="16" r="13" fill="#f59e0b" stroke="#ffffff" stroke-width="2.5" filter="url(#shadow-stop)" />
+      <text x="16" y="21" font-size="14" font-family="system-ui, sans-serif" font-weight="bold" text-anchor="middle" fill="#ffffff">${number}</text>
     </svg>`;
-  return L.divIcon({ html: svg, className: "pin-icon", iconSize: [26, 26], iconAnchor: [13, 13], popupAnchor: [0, -13] });
+  return L.divIcon({ html: svg, className: "pin-icon", iconSize: [32, 32], iconAnchor: [16, 16], popupAnchor: [0, -16] });
 }
