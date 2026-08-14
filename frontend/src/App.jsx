@@ -319,6 +319,7 @@ export default function App() {
               layers={layers}
               setLayers={setLayers}
               error={geoError || error}
+              userProfile={userProfile}
               savedLocations={userProfile.savedLocations}
             />
           ) : (

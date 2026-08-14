@@ -13,6 +13,8 @@ export default function PlaceSearchCard({
   layers,
   setLayers,
   error,
+  userProfile,
+  savedLocations
 }) {
   return (
     <div className="panel">
@@ -41,6 +43,7 @@ export default function PlaceSearchCard({
         onSelect={onSelectPlace} 
         near={searchNear} 
         onUseMyLocation={onUseMyLocationDirections}
+        savedLocations={savedLocations}
       />
 
       {place && (
