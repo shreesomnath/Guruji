@@ -280,16 +280,6 @@ export default function App() {
         </main>
 
         <div className="floating-panel">
-          {/* User profile widget at top */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px", padding: "8px", background: "#f8fafc", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
-            <span style={{ fontSize: "0.85rem", fontWeight: "bold", color: "#334155" }}>
-              {userProfile.name ? `👋 Hello, ${userProfile.name}` : "Not signed in"}
-            </span>
-            <button className="link-button" onClick={() => setShowAuthModal(true)} style={{ padding: "4px 8px", margin: 0 }}>
-              {userProfile.name ? "Settings" : "Create Account / Sign In"}
-            </button>
-          </div>
-
           {viewMode === "search" ? (
             <PlaceSearchCard
               isPremiumView={isPremiumView}
@@ -344,6 +334,24 @@ export default function App() {
               </p>
             </div>
           )}
+        </div>
+
+        {/* Profile / Sign In at Top Right Corner */}
+        <div style={{ 
+          position: "absolute", top: "16px", right: "16px", zIndex: 1000, 
+          background: "white", padding: "6px 8px 6px 16px", borderRadius: "24px", 
+          boxShadow: "0 2px 8px rgba(0,0,0,0.15)", display: "flex", alignItems: "center", gap: "12px" 
+        }}>
+          <span style={{ fontSize: "0.85rem", fontWeight: "bold", color: "#334155" }}>
+            {userProfile.name ? `Hello, ${userProfile.name}` : "Guest"}
+          </span>
+          <button 
+            className="primary" 
+            onClick={() => setShowAuthModal(true)} 
+            style={{ margin: 0, padding: "6px 16px", borderRadius: "20px", fontSize: "0.85rem" }}
+          >
+            {userProfile.name ? "Profile" : "Sign In"}
+          </button>
         </div>
       </div>
       
