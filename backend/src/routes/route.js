@@ -49,9 +49,15 @@ router.get("/", async (req, res) => {
 
     const selected = mode === "safest" ? safest : fastest;
 
-    const economics = computeEconomics({
-      distanceMiles: selected.distanceMiles,
-      durationMinutes: selected.durationMinutes,
+    const economicsFastest = computeEconomics({
+      distanceMiles: fastest.distanceMiles,
+      durationMinutes: fastest.durationMinutes,
+      config: economicsConfig,
+    });
+
+    const economicsSafest = computeEconomics({
+      distanceMiles: safest.distanceMiles,
+      durationMinutes: safest.durationMinutes,
       config: economicsConfig,
     });
 
@@ -66,13 +72,25 @@ router.get("/", async (req, res) => {
         hotspotScore: selected.hotspotScore,
         hotspotsOnRoute: selected.hotspotsOnRoute,
       },
+      fastest: {
+        distanceMiles: round1(fastest.distanceMiles),
+        durationMinutes: round1(fastest.durationMinutes),
+        hotspotScore: fastest.hotspotScore,
+        economics: economicsFastest
+      },
+      safest: {
+        distanceMiles: round1(safest.distanceMiles),
+        durationMinutes: round1(safest.durationMinutes),
+        hotspotScore: safest.hotspotScore,
+        economics: economicsSafest
+      },
       alternatives: scored.map((s) => ({
         id: s.id,
         distanceMiles: round1(s.distanceMiles),
         durationMinutes: round1(s.durationMinutes),
         hotspotScore: s.hotspotScore,
       })),
-      economics,
+      economics: mode === "safest" ? economicsSafest : economicsFastest,
       nearestParking,
     });
   } catch (err) {
