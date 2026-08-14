@@ -1,15 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { fetchGeocode } from "../lib/api.js";
 
-export default function LocationSearch({ label, placeholder, onSelect, near, initialValue }) {
+export default function LocationSearch({ label, placeholder, onSelect, near, initialValue, onUseMyLocation }) {
   const [query, setQuery] = useState(initialValue || "");
   const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const debounceRef = useRef(null);
 
-  // Reflect programmatic changes (e.g. "Use my location", the Directions
-  // hand-off pre-filling the destination) without fighting the user's typing.
   useEffect(() => {
     setQuery(initialValue || "");
   }, [initialValue]);
@@ -44,6 +42,11 @@ export default function LocationSearch({ label, placeholder, onSelect, near, ini
     setOpen(false);
   };
 
+  const handleUseLocation = () => {
+    setOpen(false);
+    if (onUseMyLocation) onUseMyLocation();
+  };
+
   return (
     <div className="location-search">
       <label className="field-label">{label}</label>
@@ -52,20 +55,39 @@ export default function LocationSearch({ label, placeholder, onSelect, near, ini
         value={query}
         placeholder={placeholder}
         onChange={(e) => setQuery(e.target.value)}
-        onFocus={() => results.length > 0 && setOpen(true)}
+        onFocus={() => setOpen(true)}
         onBlur={() => setTimeout(() => setOpen(false), 150)}
       />
-      {loading && <span className="search-hint">Searching…</span>}
-      {open && results.length > 0 && (
+      {open && (
         <ul className="search-results">
-          {results.map((r, i) => (
-            <li key={i} onMouseDown={() => handleSelect(r)}>
-              {r.label}
-              {typeof r.distanceMiles === "number" && (
-                <span className="result-distance"> — {Math.round(r.distanceMiles)} mi away</span>
+          {query.trim().length === 0 ? (
+            <>
+              {onUseMyLocation && (
+                <li onMouseDown={handleUseLocation} style={{ fontWeight: "bold", color: "#2563eb" }}>
+                  📍 Current Location
+                </li>
               )}
-            </li>
-          ))}
+              <li onMouseDown={() => handleSelect({ lat: 36.1627, lng: -86.7816, label: "Home (Nashville, TN)" })}>
+                🏠 Home (Nashville, TN)
+              </li>
+              <li onMouseDown={() => handleSelect({ lat: 35.1495, lng: -90.0490, label: "Warehouse (Memphis, TN)" })}>
+                📦 Warehouse (Memphis, TN)
+              </li>
+            </>
+          ) : results.length > 0 ? (
+            results.map((r, i) => (
+              <li key={i} onMouseDown={() => handleSelect(r)}>
+                {r.label}
+                {typeof r.distanceMiles === "number" && (
+                  <span className="result-distance"> — {Math.round(r.distanceMiles)} mi away</span>
+                )}
+              </li>
+            ))
+          ) : loading ? (
+            <li className="search-hint">Searching…</li>
+          ) : query.trim().length >= 3 ? (
+            <li className="search-hint">No results found</li>
+          ) : null}
         </ul>
       )}
     </div>

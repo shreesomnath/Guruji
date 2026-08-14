@@ -18,7 +18,7 @@ export default function PlaceSearchCard({
     <div className="panel">
       <div className="brand-row">
         <div className="brand">
-          <Logo size={52} />
+          <Logo size={74} />
           <div>
             <h2>Guruji</h2>
             <span className="subtitle">OPTIMA-FLEET · Tennessee</span>
@@ -31,7 +31,13 @@ export default function PlaceSearchCard({
       </div>
       <p className="hint">Search a place, or click the map to drop a pin.</p>
 
-      <LocationSearch label="Search Guruji" placeholder="Search for a place, address, or stop…" onSelect={onSelectPlace} near={searchNear} />
+      <LocationSearch 
+        label="Search Guruji" 
+        placeholder="Search for a place, address, or stop…" 
+        onSelect={onSelectPlace} 
+        near={searchNear} 
+        onUseMyLocation={onUseMyLocationDirections}
+      />
 
       {place && (
         <div className="place-card">
@@ -43,10 +49,6 @@ export default function PlaceSearchCard({
           </div>
         </div>
       )}
-
-      <button className="link-button" onClick={onUseMyLocationDirections}>
-        📍 Directions from my current location
-      </button>
 
       <LayerChips layers={layers} setLayers={setLayers} />
 

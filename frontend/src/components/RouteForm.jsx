@@ -48,10 +48,8 @@ export default function RouteForm({
         onSelect={onSelectOrigin}
         near={searchNear}
         initialValue={origin?.label}
+        onUseMyLocation={onUseMyLocation}
       />
-      <button className="link-button" onClick={onUseMyLocation} disabled={tracking}>
-        📍 Use my current location
-      </button>
       {geoError && <p className="error">{geoError}</p>}
 
       <LocationSearch
