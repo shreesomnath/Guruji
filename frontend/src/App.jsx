@@ -356,12 +356,15 @@ export default function App() {
 
         {/* Developer Credits at Bottom Right Corner */}
         <div style={{ 
-          position: "absolute", bottom: "24px", right: "16px", zIndex: 1000, 
-          background: "rgba(255,255,255,0.9)", padding: "8px 14px", borderRadius: "8px", 
-          boxShadow: "0 2px 8px rgba(0,0,0,0.15)", fontSize: "0.8rem", color: "#1e293b",
+          position: "absolute", bottom: "24px", right: "80px", zIndex: 1000, 
+          background: "rgba(255,255,255,0.95)", padding: "10px 16px", borderRadius: "8px", 
+          boxShadow: "0 4px 12px rgba(0,0,0,0.1)", fontSize: "0.85rem", color: "#334155",
           backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.5)"
         }}>
-          Developed by <b style={{color: "#2563eb"}}>Er. Somnath Luitel</b> & <b style={{color: "#2563eb"}}>Er. Arbin Amagain</b>
+          Developed by 
+          <b style={{ color: "#1a73e8", fontFamily: "'Poppins', sans-serif", marginLeft: "6px" }}>Er. Somnath Luitel</b> 
+          <span style={{ margin: "0 6px", color: "#94a3b8" }}>&</span> 
+          <b style={{ color: "#1a73e8", fontFamily: "'Poppins', sans-serif" }}>Er. Arbin Amagain</b>
         </div>
       </div>
       
