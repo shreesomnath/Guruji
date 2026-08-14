@@ -86,7 +86,7 @@ export default function MapView({
   return (
     <MapContainer center={TENNESSEE_CENTER} zoom={7} zoomControl={false} style={{ height: "100%", width: "100%" }}>
       <ZoomControl position="bottomright" />
-      <LayersControl position="topright">
+      <LayersControl position="bottomright">
         <LayersControl.BaseLayer checked name="Map">
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
