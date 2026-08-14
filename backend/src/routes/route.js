@@ -89,6 +89,7 @@ router.get("/", async (req, res) => {
         distanceMiles: round1(s.distanceMiles),
         durationMinutes: round1(s.durationMinutes),
         hotspotScore: s.hotspotScore,
+        geometry: s.geometry,
       })),
       economics: mode === "safest" ? economicsSafest : economicsFastest,
       nearestParking,

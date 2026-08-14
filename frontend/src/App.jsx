@@ -240,6 +240,7 @@ export default function App() {
             onMapClick={handleMapClick}
             onAddStop={handleAddStop}
             routeGeometry={routeResult?.selected.geometry}
+            alternatives={routeResult?.alternatives}
             hotspots={hotspots}
             restAreas={restAreas}
             parking={parking}

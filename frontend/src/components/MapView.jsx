@@ -70,6 +70,7 @@ export default function MapView({
   onMapClick,
   onAddStop,
   routeGeometry,
+  alternatives,
   hotspots,
   restAreas,
   parking,
@@ -121,8 +122,35 @@ export default function MapView({
       {layers.parking && <ParkingLayer data={parking} onAddStop={onAddStop} />}
       {layers.gasStations && <GasStationLayer data={gasStations} onAddStop={onAddStop} />}
 
+      {/* Render unselected alternatives first so they are underneath the selected route */}
+      {alternatives && alternatives.map((alt) => {
+        // Skip rendering the alternative if it exactly matches the main route
+        if (routeGeometry && routeGeometry.coordinates.length === alt.geometry.coordinates.length) {
+          const isSame = routeGeometry.coordinates.every((coord, i) => 
+            coord[0] === alt.geometry.coordinates[i][0] && coord[1] === alt.geometry.coordinates[i][1]
+          );
+          if (isSame) return null;
+        }
+        
+        const altPositions = alt.geometry.coordinates.map(([lng, lat]) => [lat, lng]);
+        return (
+          <Polyline key={alt.id} positions={altPositions} pathOptions={{ color: "#8a94a6", weight: 5, opacity: 0.6 }}>
+            <Popup>
+              <b>Alternative Route</b><br/>
+              Time: {alt.durationMinutes} min<br/>
+              Distance: {alt.distanceMiles} mi<br/>
+              Hotspots: {alt.hotspotScore}
+            </Popup>
+          </Polyline>
+        );
+      })}
+
       {routePositions && (
-        <Polyline positions={routePositions} pathOptions={{ color: "#1d4ed8", weight: 5, opacity: 0.8 }} />
+        <Polyline positions={routePositions} pathOptions={{ color: "#1d4ed8", weight: 6, opacity: 0.9 }}>
+          <Popup>
+            <b>Selected Route</b>
+          </Popup>
+        </Polyline>
       )}
 
       {origin && tracking && (
