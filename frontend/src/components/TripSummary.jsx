@@ -1,4 +1,4 @@
-
+import { formatDuration } from "../lib/geo.js";
 
 export default function TripSummary({ result, hosHours, setHosHours }) {
   if (!result) return null;
@@ -13,7 +13,7 @@ export default function TripSummary({ result, hosHours, setHosHours }) {
       <h2>Trip summary ({mode})</h2>
       <ul className="summary-list">
         <li>Distance: {selected.distanceMiles} mi</li>
-        <li>Duration: {Math.round(selected.durationMinutes)} min</li>
+        <li>Duration: {formatDuration(selected.durationMinutes)}</li>
         <li>Crash hotspots on route: {selected.hotspotsOnRoute.length} (score {selected.hotspotScore})</li>
         <li>Estimated fuel cost: ${economics.fuelCost}</li>
       </ul>

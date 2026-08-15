@@ -13,3 +13,11 @@ export function haversineMiles(a, b) {
 function toRad(deg) {
   return (deg * Math.PI) / 180;
 }
+
+export function formatDuration(minutes) {
+  const m = Math.round(minutes);
+  const hrs = Math.floor(m / 60);
+  const mins = m % 60;
+  if (hrs > 0) return `${hrs} hr ${mins} min`;
+  return `${mins} min`;
+}

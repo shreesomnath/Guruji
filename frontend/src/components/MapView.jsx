@@ -14,6 +14,7 @@ import {
 import { useEffect } from "react";
 import L from "leaflet";
 import { pinIcon, stopIcon, truckIcon } from "../lib/mapIcons.js";
+import { formatDuration } from "../lib/geo.js";
 import HotspotLayer from "./HotspotLayer.jsx";
 import RestAreaLayer from "./RestAreaLayer.jsx";
 import ParkingLayer from "./ParkingLayer.jsx";
@@ -266,7 +267,7 @@ export default function MapView({
           >
             <Popup>
               <b>Alternative Route</b><br/>
-              Time: {alt.durationMinutes} min<br/>
+              Time: {formatDuration(alt.durationMinutes)}<br/>
               Distance: {alt.distanceMiles} mi<br/>
               Hotspots: {alt.hotspotScore}<br/><br/>
               <button onClick={() => onSelectAlternative && onSelectAlternative(alt)}>Select this route</button>
